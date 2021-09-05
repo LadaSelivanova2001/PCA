@@ -8,9 +8,9 @@ using namespace std;
 PCA::PCA() 
 {
 	Matrix data;
-	Matrix scores;// матрица счетов
-	Matrix loadings;// матрица весов
-	Matrix tailings;// матрица остатков
+	Matrix scores;// РјР°С‚СЂРёС†Р° СЃС‡РµС‚РѕРІ
+	Matrix loadings;// РјР°С‚СЂРёС†Р° РІРµСЃРѕРІ
+	Matrix tailings;// РјР°С‚СЂРёС†Р° РѕСЃС‚Р°С‚РєРѕРІ
 }
 
 PCA::PCA(Matrix a)
@@ -18,19 +18,19 @@ PCA::PCA(Matrix a)
 	data = a;
 }
 
-Matrix PCA::centering() //центрирование (вычитание из каждого столбца среднего по столбцу значения)
+Matrix PCA::centering() //С†РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ (РІС‹С‡РёС‚Р°РЅРёРµ РёР· РєР°Р¶РґРѕРіРѕ СЃС‚РѕР»Р±С†Р° СЃСЂРµРґРЅРµРіРѕ РїРѕ СЃС‚РѕР»Р±С†Сѓ Р·РЅР°С‡РµРЅРёСЏ)
 { 
 	int width = data[0].size();
 	int height = data.transpose()[0].size();
 	Matrix result;
-	result = data.transpose(); //переносим данные в result
+	result = data.transpose(); //РїРµСЂРµРЅРѕСЃРёРј РґР°РЅРЅС‹Рµ РІ result
 	double average_column = 0;
 	double sum_column = 0;
 	for (int i = 0; i < data[0].size(); i++) {
 		for (int j = 0; j < result[i].size(); j++) {
-			sum_column += result[i][j]; //сумма элементов каждого столбца
+			sum_column += result[i][j]; //СЃСѓРјРјР° СЌР»РµРјРµРЅС‚РѕРІ РєР°Р¶РґРѕРіРѕ СЃС‚РѕР»Р±С†Р°
 		}
-		average_column = sum_column / result[i].size(); //среднее каждого столбца
+		average_column = sum_column / result[i].size(); //СЃСЂРµРґРЅРµРµ РєР°Р¶РґРѕРіРѕ СЃС‚РѕР»Р±С†Р°
 		for (int j = 0; j < result[i].size(); j++) {
 			result[i][j] -= average_column;
 		}
@@ -44,7 +44,7 @@ Matrix PCA::centering() //центрирование (вычитание из каждого столбца среднего п
 	return result;
 }
 
-Matrix PCA::scaling() //шкалирование (каждый элемент столбца делится на стандартное отклонение столбца)
+Matrix PCA::scaling() //С€РєР°Р»РёСЂРѕРІР°РЅРёРµ (РєР°Р¶РґС‹Р№ СЌР»РµРјРµРЅС‚ СЃС‚РѕР»Р±С†Р° РґРµР»РёС‚СЃСЏ РЅР° СЃС‚Р°РЅРґР°СЂС‚РЅРѕРµ РѕС‚РєР»РѕРЅРµРЅРёРµ СЃС‚РѕР»Р±С†Р°)
 { 
 	try {
 		int width = data[0].size();
@@ -55,9 +55,9 @@ Matrix PCA::scaling() //шкалирование (каждый элемент столбца делится на стандарт
 		double deviation = 0;
 		for (int i = 0; i < data[0].size(); i++) {
 			for (int j = 0; j < result[i].size(); j++) {
-				sqr_sum_column += pow(result[i][j], 2); //сумма квадратов элементов столбца
+				sqr_sum_column += pow(result[i][j], 2); //СЃСѓРјРјР° РєРІР°РґСЂР°С‚РѕРІ СЌР»РµРјРµРЅС‚РѕРІ СЃС‚РѕР»Р±С†Р°
 			}
-			deviation = sqrt(sqr_sum_column / result[i].size()); //находим стандартное отклонение
+			deviation = sqrt(sqr_sum_column / result[i].size()); //РЅР°С…РѕРґРёРј СЃС‚Р°РЅРґР°СЂС‚РЅРѕРµ РѕС‚РєР»РѕРЅРµРЅРёРµ
 			result[i] = result[i] / deviation;
 			sqr_sum_column = 0;
 			deviation = 0;
@@ -67,7 +67,7 @@ Matrix PCA::scaling() //шкалирование (каждый элемент столбца делится на стандарт
 		return result;
 	}
 	catch (...) {
-		cerr << "Ошибка" << endl;
+		cerr << "РћС€РёР±РєР°" << endl;
 	}
 }
 
@@ -86,7 +86,7 @@ void PCA::NIPALS(const int PC)
 				t0 = t;
 				t = (E * p) * (1 / (p & p));
 				d = t0 - t;
-			} while (d.norm() >= 1e-8); //проверка сходимости
+			} while (d.norm() >= 1e-8); //РїСЂРѕРІРµСЂРєР° СЃС…РѕРґРёРјРѕСЃС‚Рё
 
 			E = E - t * p.transpose();
 			if (h == 0) {
@@ -94,7 +94,7 @@ void PCA::NIPALS(const int PC)
 				T = t;
 			}
 			else {
-				P = P.add_column(p); //формирование матриц счетов и весов
+				P = P.add_column(p); //С„РѕСЂРјРёСЂРѕРІР°РЅРёРµ РјР°С‚СЂРёС† СЃС‡РµС‚РѕРІ Рё РІРµСЃРѕРІ
 				T = T.add_column(t);
 			}
 		}
@@ -106,11 +106,11 @@ void PCA::NIPALS(const int PC)
 		return;
 	}
 	catch (...) {
-		cerr << "Ошибка" << endl;
+		cerr << "РћС€РёР±РєР°" << endl;
 	}
 }
 
-Matrix PCA::leverage() const //вычисление размахов
+Matrix PCA::leverage() const //РІС‹С‡РёСЃР»РµРЅРёРµ СЂР°Р·РјР°С…РѕРІ
 { 
 	try {
 		vector<vector<double>> leverage;
@@ -131,11 +131,11 @@ Matrix PCA::leverage() const //вычисление размахов
 		return result;
 	}
 	catch (...) {
-		cerr << "Ошибка" << endl;
+		cerr << "РћС€РёР±РєР°" << endl;
 	}
 }
 
-Matrix PCA::deviation(const int PC) const //вычисление отклонений
+Matrix PCA::deviation(const int PC) const //РІС‹С‡РёСЃР»РµРЅРёРµ РѕС‚РєР»РѕРЅРµРЅРёР№
 { 
 	try {
 		Matrix residuals, t, p;
@@ -168,11 +168,11 @@ Matrix PCA::deviation(const int PC) const //вычисление отклонений
 		return result;
 	}
 	catch (...) {
-		cerr << "Ошибка" << endl;
+		cerr << "РћС€РёР±РєР°" << endl;
 	}
 }
 
-double PCA::TRV(const int PC) const //полная дисперсия
+double PCA::TRV(const int PC) const //РїРѕР»РЅР°СЏ РґРёСЃРїРµСЂСЃРёСЏ
 { 
 	try {
 		Matrix v;
@@ -192,11 +192,11 @@ double PCA::TRV(const int PC) const //полная дисперсия
 		return trv;
 	}
 	catch (...) {
-		cerr << "Ошибка" << endl;
+		cerr << "РћС€РёР±РєР°" << endl;
 	}
 }
 
-double PCA::ERV(const int PC) const //объясненная дисперсия
+double PCA::ERV(const int PC) const //РѕР±СЉСЏСЃРЅРµРЅРЅР°СЏ РґРёСЃРїРµСЂСЃРёСЏ
 { 
 	try {
 		double erv = 0;
@@ -204,7 +204,7 @@ double PCA::ERV(const int PC) const //объясненная дисперсия
 		return erv;
 	}
 	catch (...) {
-		cerr << "Ошибка" << endl;
+		cerr << "РћС€РёР±РєР°" << endl;
 	}
 }
 
