@@ -8,7 +8,7 @@ using namespace std;
 int main()
 {
 	setlocale(LC_ALL, "Russian");
-	ifstream f1("data.txt", ios::in); //считываем данные из исходных файлов
+	ifstream f1("data.txt", ios::in); //СЃС‡РёС‚С‹РІР°РµРј РґР°РЅРЅС‹Рµ РёР· РёСЃС…РѕРґРЅС‹С… С„Р°Р№Р»РѕРІ
 	ifstream f2("scores.txt", ios::in);
 	ifstream f3("loadings.txt", ios::in);
 
@@ -17,36 +17,36 @@ int main()
 	Matrix check_loadings;
 
 	f1 >> data;
-	f2 >> check_scores; //check_scores и check_loadings необходимы для проверки полученных scores и loadings 
+	f2 >> check_scores; //check_scores Рё check_loadings РЅРµРѕР±С…РѕРґРёРјС‹ РґР»СЏ РїСЂРѕРІРµСЂРєРё РїРѕР»СѓС‡РµРЅРЅС‹С… scores Рё loadings 
 	f3 >> check_loadings;
 
 	int PC = min(data[0].size(), data.transpose()[0].size());
 
 
 	PCA pca(data);
-	pca.centering(); //центрирование
-	pca.scaling(); //шкалирование
-	pca.NIPALS(PC); //получение матриц счетов, весов и остатков
+	pca.centering(); //С†РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ
+	pca.scaling(); //С€РєР°Р»РёСЂРѕРІР°РЅРёРµ
+	pca.NIPALS(PC); //РїРѕР»СѓС‡РµРЅРёРµ РјР°С‚СЂРёС† СЃС‡РµС‚РѕРІ, РІРµСЃРѕРІ Рё РѕСЃС‚Р°С‚РєРѕРІ
 
-	cout << "Начальные данные" << endl;
+	cout << "РќР°С‡Р°Р»СЊРЅС‹Рµ РґР°РЅРЅС‹Рµ" << endl;
 	cout << data << endl;
-	cout << "Данные после центрирования и шкалирования" << endl;
+	cout << "Р”Р°РЅРЅС‹Рµ РїРѕСЃР»Рµ С†РµРЅС‚СЂРёСЂРѕРІР°РЅРёСЏ Рё С€РєР°Р»РёСЂРѕРІР°РЅРёСЏ" << endl;
 	cout << pca.get_data() << endl;
-	cout << "Полученная матрица счётов" << endl;
+	cout << "РџРѕР»СѓС‡РµРЅРЅР°СЏ РјР°С‚СЂРёС†Р° СЃС‡С‘С‚РѕРІ" << endl;
 	cout << pca.get_scores() << endl;
-	cout << "Матрица счётов для сравнения" << endl;
+	cout << "РњР°С‚СЂРёС†Р° СЃС‡С‘С‚РѕРІ РґР»СЏ СЃСЂР°РІРЅРµРЅРёСЏ" << endl;
 	cout << check_scores << endl;
-	cout << "Полученная матрица весов" << endl;
+	cout << "РџРѕР»СѓС‡РµРЅРЅР°СЏ РјР°С‚СЂРёС†Р° РІРµСЃРѕРІ" << endl;
 	cout << pca.get_loadings() << endl;
-	cout << "Матрица весов для сравнения" << endl;
+	cout << "РњР°С‚СЂРёС†Р° РІРµСЃРѕРІ РґР»СЏ СЃСЂР°РІРЅРµРЅРёСЏ" << endl;
 	cout << check_loadings << endl;
-	cout << "Размахи" << endl;
+	cout << "Р Р°Р·РјР°С…Рё" << endl;
 	cout << pca.leverage() << endl;
-	cout << "Отклонения" << endl;
+	cout << "РћС‚РєР»РѕРЅРµРЅРёСЏ" << endl;
 	cout << pca.deviation(PC) << endl;
-	cout << "Полная дисперсия" << endl;
+	cout << "РџРѕР»РЅР°СЏ РґРёСЃРїРµСЂСЃРёСЏ" << endl;
 	cout << pca.TRV(PC) << endl;
-	cout << "Объясненная дисперсия" << endl;
+	cout << "РћР±СЉСЏСЃРЅРµРЅРЅР°СЏ РґРёСЃРїРµСЂСЃРёСЏ" << endl;
 	cout << pca.ERV(PC) << endl;
 
 	f1.close();

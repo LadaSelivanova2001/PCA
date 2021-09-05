@@ -67,7 +67,7 @@ bool is_zero(vector<double> v) {
 }
 
 
-//дополнение
+//РґРѕРїРѕР»РЅРµРЅРёРµ
 vector<double>& Matrix::operator[](const int index) {
 	return matrix[index];
 }
@@ -145,7 +145,7 @@ void Matrix::read_from_file(ifstream& file) {
 		}
 	}
 	x_dimention++;
-	y_dimention = (*y_set.begin() + 1); // если множество пустое, знаит в цикл не вошли, значит матрица1х1
+	y_dimention = (*y_set.begin() + 1); // РµСЃР»Рё РјРЅРѕР¶РµСЃС‚РІРѕ РїСѓСЃС‚РѕРµ, Р·РЅР°РёС‚ РІ С†РёРєР» РЅРµ РІРѕС€Р»Рё, Р·РЅР°С‡РёС‚ РјР°С‚СЂРёС†Р°1С…1
 }
 
 void Matrix::resize(const int& new_x, const int& new_y) {
@@ -390,7 +390,7 @@ Matrix operator*(const Matrix& lhs, const Matrix& rhs) {
 	return result;
 }
 
-//скалярное произведение
+//СЃРєР°Р»СЏСЂРЅРѕРµ РїСЂРѕРёР·РІРµРґРµРЅРёРµ
 double operator&(const Matrix& lhs, const Matrix& rhs) {
 	if (lhs.x_dimention == 0 || lhs.y_dimention == 0) {
 		throw invalid_argument("left matrix is empty");
@@ -430,7 +430,7 @@ double operator&(const Matrix& lhs, const Matrix& rhs) {
 	return res;
 }
 
-//произведение Адамара
+//РїСЂРѕРёР·РІРµРґРµРЅРёРµ РђРґР°РјР°СЂР°
 Matrix operator%(const Matrix& lhs, const Matrix& rhs) {
 	Matrix result;
 	if (lhs.x_dimention == 0 || lhs.y_dimention == 0) {
@@ -458,7 +458,7 @@ Matrix operator%(const Matrix& lhs, const Matrix& rhs) {
 
 
 /*****************************************
-* Определения методов для Symmetric_matrix
+* РћРїСЂРµРґРµР»РµРЅРёСЏ РјРµС‚РѕРґРѕРІ РґР»СЏ Symmetric_matrix
 *****************************************/
 
 ifstream& operator>>(ifstream& in, Symmetric_matrix& S_m) {
@@ -486,7 +486,7 @@ ifstream& operator>>(ifstream& in, Symmetric_matrix& S_m) {
 
 
 /****************************************
-* Определения методов для Diagonal_matrix
+* РћРїСЂРµРґРµР»РµРЅРёСЏ РјРµС‚РѕРґРѕРІ РґР»СЏ Diagonal_matrix
 ****************************************/
 
 Diagonal_matrix::Diagonal_matrix(const int& size, const vector<double>& content) {
@@ -530,7 +530,7 @@ ifstream& operator>>(ifstream& in, Diagonal_matrix& D_m) {
 
 
 /****************************************
-* Определения методов для Identity_matrix
+* РћРїСЂРµРґРµР»РµРЅРёСЏ РјРµС‚РѕРґРѕРІ РґР»СЏ Identity_matrix
 ****************************************/
 
 Identity_matrix::Identity_matrix(const int& size) {
@@ -571,7 +571,7 @@ ifstream& operator>>(ifstream& in, Identity_matrix& I_m) {
 
 
 /************************************************
-* Определения методов для Upper_triangular_matrix
+* РћРїСЂРµРґРµР»РµРЅРёСЏ РјРµС‚РѕРґРѕРІ РґР»СЏ Upper_triangular_matrix
 ************************************************/
 
 Upper_triangular_matrix::Upper_triangular_matrix(const vector<vector<double>>& U_t_m) {
@@ -630,7 +630,7 @@ Lower_triangular_matrix Upper_triangular_matrix::transpose() const {
 }
 
 /************************************************
-* Определения методов для Lower_triangular_matrix
+* РћРїСЂРµРґРµР»РµРЅРёСЏ РјРµС‚РѕРґРѕРІ РґР»СЏ Lower_triangular_matrix
 ************************************************/
 
 Lower_triangular_matrix::Lower_triangular_matrix(const vector<vector<double>>& L_t_m) {
@@ -691,7 +691,7 @@ Upper_triangular_matrix Lower_triangular_matrix::transpose() const {
 
 
 
-//лаба 2
+//Р»Р°Р±Р° 2
 double Matrix::trace() const {
 	double trace = 0;
 	if (x_dimention == 0 || y_dimention == 0) {
@@ -764,7 +764,7 @@ double Matrix::determinant() const {
 }
 
 
-//это можно использовать и для матриц и для "векторов", это вызовет воответствующий метод
+//СЌС‚Рѕ РјРѕР¶РЅРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ Рё РґР»СЏ РјР°С‚СЂРёС† Рё РґР»СЏ "РІРµРєС‚РѕСЂРѕРІ", СЌС‚Рѕ РІС‹Р·РѕРІРµС‚ РІРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РёР№ РјРµС‚РѕРґ
 double Matrix::norm() const {
 	if (x_dimention == 0 || y_dimention == 0) {
 		throw invalid_argument("matrix is empty");
@@ -831,7 +831,7 @@ double Matrix::max_norm() const {
 
 
 
-//лаба 3
+//Р»Р°Р±Р° 3
 int Matrix::rank() const {
 	int result = 1, rank = 0, flag = 0;
 	if (x_dimention == 0 || y_dimention == 0) {
@@ -860,7 +860,7 @@ int Matrix::rank() const {
 	return rank;
 }
 
-//угол между векторами (cos)
+//СѓРіРѕР» РјРµР¶РґСѓ РІРµРєС‚РѕСЂР°РјРё (cos)
 double operator^(const Matrix& lhs, const Matrix& rhs) {
 	if (!lhs.is_vector() || !rhs.is_vector()) {
 		throw invalid_argument("operation '^' is undefined for matrix");
@@ -935,7 +935,7 @@ Matrix Matrix::inverse() const {
 
 
 
-//лаба 4
+//Р»Р°Р±Р° 4
 
 ifstream& operator>>(ifstream& in, Matrix& m) {
 	if (!in.is_open()) {
@@ -956,7 +956,7 @@ ofstream& operator<<(ofstream& out, const Matrix& m) {
 		throw invalid_argument("connot print empty matrix");
 	}
 	int n = 6;
-	out << fixed << setprecision(n - 3);        //Почему переполнение????????????77??7777
+	out << fixed << setprecision(n - 3);        //РџРѕС‡РµРјСѓ РїРµСЂРµРїРѕР»РЅРµРЅРёРµ????????????77??7777
 	for (const auto& line : m.matrix) {
 		for (const auto& elem : line) {
 			out << setw(n) << setfill(' ') << elem << "  ";
@@ -967,9 +967,9 @@ ofstream& operator<<(ofstream& out, const Matrix& m) {
 }
 
 /****************************************
-* В начало файла записываются размерности
-* x_dimention и y_dimention, только потом
-* записывается сама матрица
+* Р’ РЅР°С‡Р°Р»Рѕ С„Р°Р№Р»Р° Р·Р°РїРёСЃС‹РІР°СЋС‚СЃСЏ СЂР°Р·РјРµСЂРЅРѕСЃС‚Рё
+* x_dimention Рё y_dimention, С‚РѕР»СЊРєРѕ РїРѕС‚РѕРј
+* Р·Р°РїРёСЃС‹РІР°РµС‚СЃСЏ СЃР°РјР° РјР°С‚СЂРёС†Р°
 ****************************************/
 void Matrix::write_to_binary(const std::string& path) {
 	ofstream file(path, ios::out | ios::binary);
