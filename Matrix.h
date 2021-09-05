@@ -17,7 +17,7 @@ protected:
 	void resize(const int& new_x, const int& new_y);
 	bool is_vector() const;
 
-	//лаба 2
+	//Р»Р°Р±Р° 2
 	Matrix gaussian_algorithm() const;
 	double vector_norm() const;
 	double matrix_norm() const;
@@ -36,29 +36,29 @@ public:
 	friend Matrix operator*(const double& n, const Matrix& rhs);
 	friend Matrix operator*(const Matrix& lhs, const double& n);
 	friend Matrix operator*(const Matrix& lhs, const Matrix& rhs);
-	friend Matrix operator%(const Matrix& lhs, const Matrix& rhs);      //произведение Адамара
-	friend double operator&(const Matrix& lhs, const Matrix& rhs);      //скалярное произведение
+	friend Matrix operator%(const Matrix& lhs, const Matrix& rhs);      //РїСЂРѕРёР·РІРµРґРµРЅРёРµ РђРґР°РјР°СЂР°
+	friend double operator&(const Matrix& lhs, const Matrix& rhs);      //СЃРєР°Р»СЏСЂРЅРѕРµ РїСЂРѕРёР·РІРµРґРµРЅРёРµ
 
-	//лаба 2
+	//Р»Р°Р±Р° 2
 	double trace() const;
 	double determinant() const;
 	double norm() const;
 	double max_norm() const;
 
-	//лаба 3
+	//Р»Р°Р±Р° 3
 	int rank() const;
-	friend double operator^(const Matrix& lhs, const Matrix& rhs);      //угол между векторами (cos)
+	friend double operator^(const Matrix& lhs, const Matrix& rhs);      //СѓРіРѕР» РјРµР¶РґСѓ РІРµРєС‚РѕСЂР°РјРё (cos)
 	Matrix inverse() const;
 	//void transpose();
 	Matrix transpose() const;
 
-	//лаба 4
+	//Р»Р°Р±Р° 4
 	friend std::ifstream& operator>>(std::ifstream& in, Matrix& m);
 	friend std::ofstream& operator<<(std::ofstream& out, const Matrix& m);
 	void write_to_binary(const std::string& path);
 	void read_from_binary(const std::string& path);
 
-	//дополнение
+	//РґРѕРїРѕР»РЅРµРЅРёРµ
 	std::vector<double>& operator[](const int index);
 	std::vector<double> operator[](const int index) const;
 	Matrix get_column(const int index) const;
@@ -107,7 +107,7 @@ public:
 	Upper_triangular_matrix transpose() const;
 };
 
-// из cpp для арифметики с векторами
+// РёР· cpp РґР»СЏ Р°СЂРёС„РјРµС‚РёРєРё СЃ РІРµРєС‚РѕСЂР°РјРё
 std::vector<double> operator+(const std::vector<double>& lhs, const std::vector<double>& rhs);
 
 std::vector<double> operator-(const std::vector<double>& lhs, const std::vector<double>& rhs);
